@@ -13,8 +13,9 @@ module.exports.getAllProjects = function (req, res) {
     if (results) {
       sendJSONresponse(res, 200, results)
     } else {
-      sendJSONresponse(res, 404, err
-      };
+      sendJSONresponse(res, 404, {
+        "message": "projects not found"
+      });
     }
   })
 }
