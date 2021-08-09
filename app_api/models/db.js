@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var gracefulShutdown;
 var dbURI= "mongodb+srv://artertia:Pfccska100@cluster0.n7kqo.mongodb.net/SpeGubkin";
 
-mongoose.connect(dbURI,{useNewUrlParser: true, useUnifiedTopology: true,useCreateIndex:true} );
+mongoose.connect(process.env.MONGOLAB_URI ||dbURI,{useNewUrlParser: true, useUnifiedTopology: true,useCreateIndex:true} );
 
 // CONNECTION EVENTS
 mongoose.connection.on('connected', function() {
