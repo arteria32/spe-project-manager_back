@@ -88,7 +88,7 @@ module.exports.deleteProjectByTag = function(req, res) {
   }
 };
 
-module.exports.locationsUpdateOne = function(req, res) {
+module.exports.updateProjectByTag = function(req, res) {
   if (!req.params.tag) {
     sendJSONresponse(res, 404, {
       "message": "Not found, locationid is required"
