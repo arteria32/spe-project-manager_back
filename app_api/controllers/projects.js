@@ -22,18 +22,13 @@ module.exports.getAllProjects = function (req, res) {
 
 module.exports.createNewProject = function (req, res) {
   console.log('Finding location details', req.body);
-  .name = req.body.name;
-  project.description = req.body.description;
-  project.season = req.body.season;
-  project.events = req.body.events;
-  project.socialLinks = req.body.socialLinks;
   Project.create({
     name: req.body.name,
     tag: req.body.tag,
     season: req.body.season,
     description: req.body.description,
     events:req.body.events,
-  socialLinks:req.body.socialLinks,
+  socialLinks:req.body.socialLinks
   }, function(err, location) {
     if (err) {
       console.log(err);
