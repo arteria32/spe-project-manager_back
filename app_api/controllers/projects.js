@@ -71,7 +71,7 @@ module.exports.deleteProjectByTag = function(req, res) {
     Project
       .findOneAndDelete({tag:projectTag})
       .exec(
-        function(err, location) {
+        function(err, result) {
           if (err) {
             console.log(err);
             sendJSONresponse(res, 404, err);
@@ -87,6 +87,45 @@ module.exports.deleteProjectByTag = function(req, res) {
     });
   }
 };
+
+module.exports.locationsUpdateOne = function(req, res) {
+  if (!req.params.tag) {
+    sendJSONresponse(res, 404, {
+      "message": "Not found, locationid is required"
+    });
+    return;
+  }
+  Loc
+  .find({tag:req.params.tag})
+    .exec(
+      function(err, project) {
+        if (!project) {
+          sendJSONresponse(res, 404, {
+            "message": "locationid not found"
+          });
+          return;
+        } else if (err) {
+          sendJSONresponse(res, 400, err);
+          return;
+        }
+        project.name = req.body.name;
+        project.description = req.body.description;
+        project.season = req.body.season;
+        project.events = req.body.events;
+        project.socialLinks = req.body.socialLinks;
+        project.save(function(err, project) {
+          if (err) {
+            sendJSONresponse(res, 404, err);
+          } else {
+            sendJSONresponse(res, 200, project);
+          }
+        });
+      }
+  );
+};
+
+
+
 module.exports.getAllEventsOfProject = function(req, res) {
   console.log('Finding location details', req.params);
   if (req.params && req.params.tag) {
@@ -113,4 +152,7 @@ module.exports.getAllEventsOfProject = function(req, res) {
       "message": "No projectTag in request"
     });
   }
+
+
+
 };

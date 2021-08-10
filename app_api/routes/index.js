@@ -8,6 +8,8 @@ router.get('/projects', ctrlProjects.getAllProjects);
 router.post('/projects', ctrlProjects.createNewProject);
 router.get('/projects/:tag', ctrlProjects.getProjectByTag);
 router.delete('/projects/:tag', ctrlProjects.deleteProjectByTag);
+router.put('/projects/:tag', ctrlLocations.updateProjectByTag);
+
 router.get('/projects/:tag/events', ctrlProjects.getAllEventsOfProject);
 
 
