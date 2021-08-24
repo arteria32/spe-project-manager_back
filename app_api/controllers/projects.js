@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var Project = mongoose.model('Project');
+var AccessList = mongoose.model('AccessList');
 
 var sendJSONresponse = function (res, status, content) {
   res.status(status);
@@ -29,13 +30,13 @@ module.exports.createNewProject = function (req, res) {
     description: req.body.description,
     events:req.body.events,
   socialLinks:req.body.socialLinks
-  }, function(err, location) {
+  }, function(err, project) {
     if (err) {
       console.log(err);
       sendJSONresponse(res, 400, err);
     } else {
-      console.log('done',location);
-      sendJSONresponse(res, 201, location);
+      console.log('done',project);
+      sendJSONresponse(res, 201, project);
     }
   });
 };
@@ -156,6 +157,31 @@ module.exports.getAllEventsOfProject = function(req, res) {
     });
   }
 
+
+  module.exports.checkAccess = function(req, res) {
+    console.log('checkAccesss', req.params);
+    if (req.params && req.params.userName) {
+      AccessList
+        .find({userName:req.params.userName})
+        .exec(function(err, result) {
+          console.log(result.events)
+          if (!result.events) {
+            sendJSONresponse(res, 404,false);
+            return;
+          } else if (err) {
+            console.log(err);
+            sendJSONresponse(res, 404, false);
+            return;
+          }
+          console.log(true);
+          sendJSONresponse(res, 200, true);
+        });
+    } else {
+      console.log('No projectTag specified');
+      sendJSONresponse(res, 404, false);
+    }
+  
+  
 
 
 };
