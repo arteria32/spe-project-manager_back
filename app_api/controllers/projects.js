@@ -175,7 +175,7 @@ module.exports.checkAccess = function(req, res) {
           return;
         }
         console.log(result);
-        sendJSONresponse(res, 200, ture);
+        sendJSONresponse(res, 200, true);
       });
   } else {
     console.log('No userInfo specified');
