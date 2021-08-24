@@ -13,7 +13,7 @@ router.put('/projects/:tag', ctrlProjects.updateProjectByTag);
 router.get('/projects/:tag/events', ctrlProjects.getAllEventsOfProject);
 
 
-router.get('/CheckAccess/:user', ctrlProjects.checkAccess);
+router.get('/CheckAccess/:userName', ctrlProjects.checkAccess);
 
 
 
