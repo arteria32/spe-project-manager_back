@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 
 
 var accessList= new mongoose.Schema({
-    userName:Number,
+    userName:String,
     access:boolean
     })
 
