@@ -180,6 +180,7 @@ module.exports.getAllEventsOfProject = function(req, res) {
       console.log('No projectTag specified');
       sendJSONresponse(res, 404, false);
     }
+  }
   
   
 
