@@ -157,32 +157,29 @@ module.exports.getAllEventsOfProject = function(req, res) {
     });
   }
 
+};
 
-  module.exports.checkAccess = function(req, res) {
-    console.log('checkAccesss', req.params);
-    if (req.params && req.params.userName) {
-      AccessList
-        .find({userName:req.params.userName})
-        .exec(function(err, result) {
-          console.log(result)
-          if (!result) {
-            sendJSONresponse(res, 404, false);
-            return;
-          } else if (err) {
-            console.log(err);
-            sendJSONresponse(res, 404, err);
-            return;
-          }
-          console.log(result);
-          sendJSONresponse(res, 200,true);
-        });
-    } else {
-      console.log('No userName specified');
-      sendJSONresponse(res, 404, {
-        "message": "No userName in request"
+module.exports.checkAccess = function(req, res) {
+  console.log('Finding location details', req.params);
+  if (req.params && req.params.tag) {
+    AccessList
+      .find({tag:req.userName})
+      .exec(function(err, result) {
+        console.log(result.events)
+        if (!result) {
+          sendJSONresponse(res, 404, false);
+          return;
+        } else if (err) {
+          console.log(err);
+          sendJSONresponse(res, 404, false);
+          return;
+        }
+        console.log(result);
+        sendJSONresponse(res, 200, ture);
       });
-    }
-  
-
+  } else {
+    console.log('No userInfo specified');
+    sendJSONresponse(res, 404, false);
+  }
 
 };
