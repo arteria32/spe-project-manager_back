@@ -161,7 +161,7 @@ module.exports.getAllEventsOfProject = function(req, res) {
 
 module.exports.checkAccess = function(req, res) {
   console.log('Finding location details', req.params);
-  if (req.params && req.params.tag) {
+  if (req.params && req.params.userName) {
     AccessList
       .find({tag:req.userName})
       .exec(function(err, result) {
