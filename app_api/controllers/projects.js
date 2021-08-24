@@ -164,24 +164,24 @@ module.exports.getAllEventsOfProject = function(req, res) {
       AccessList
         .find({userName:req.params.userName})
         .exec(function(err, result) {
-          console.log(result.events)
-          if (!result.events) {
-            sendJSONresponse(res, 404,"false");
+          console.log(result)
+          if (!result) {
+            sendJSONresponse(res, 404, false);
             return;
           } else if (err) {
             console.log(err);
-            sendJSONresponse(res, 404, "false");
+            sendJSONresponse(res, 404, err);
             return;
           }
-          console.log(true);
-          sendJSONresponse(res, 200, "true");
+          console.log(result);
+          sendJSONresponse(res, 200,true);
         });
     } else {
-      console.log('No projectTag specified');
-      sendJSONresponse(res, 404, "false");
+      console.log('No userName specified');
+      sendJSONresponse(res, 404, {
+        "message": "No userName in request"
+      });
     }
-  }
-  
   
 
 
