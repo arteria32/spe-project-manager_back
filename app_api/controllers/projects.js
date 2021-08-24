@@ -166,19 +166,19 @@ module.exports.getAllEventsOfProject = function(req, res) {
         .exec(function(err, result) {
           console.log(result.events)
           if (!result.events) {
-            sendJSONresponse(res, 404,false);
+            sendJSONresponse(res, 404,"false");
             return;
           } else if (err) {
             console.log(err);
-            sendJSONresponse(res, 404, false);
+            sendJSONresponse(res, 404, "false");
             return;
           }
           console.log(true);
-          sendJSONresponse(res, 200, true);
+          sendJSONresponse(res, 200, "true");
         });
     } else {
       console.log('No projectTag specified');
-      sendJSONresponse(res, 404, false);
+      sendJSONresponse(res, 404, "false");
     }
   }
   
